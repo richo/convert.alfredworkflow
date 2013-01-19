@@ -79,9 +79,10 @@ except ValueError:
   exit()
 
 conn = httplib.HTTPSConnection("www.google.com")
-req  = "/ig/calculator?q=%s=%?%s" % (_from, _to)
+req  = "/ig/calculator?q=%s=?%s" % (_from, _to)
 
-resp = conn.request("GET", req)
+conn.request("GET", req)
+resp = conn.getresponse()
 if resp.status != 200:
   print("Internal Error")
   exit()
