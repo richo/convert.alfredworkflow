@@ -68,10 +68,15 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>import json
-import httplib
+				<string>import httplib
 
-query = '{query}'
+def get_string_value(string, key):
+  start = string.find('%s:' % key)
+  first_quote = string.index('"', start) + 1
+  second_quote = string.index('"', first_quote)
+  return string[first_quote:second_quote]
+
+query = '52f in c'
 try:
   _from, _to = query.split(" in ")
 except ValueError:
@@ -86,8 +91,11 @@ resp = conn.getresponse()
 if resp.status != 200:
   print("Internal Error")
   exit()
-data = json.loads(resp.read())
-print("%s: %s", data['lhs'], data['rhs'])</string>
+data = resp.read()
+lhs = get_string_value(data, "lhs")
+rhs = get_string_value(data, "rhs")
+
+print("%s: %s" % (lhs, rhs))</string>
 				<key>type</key>
 				<integer>3</integer>
 			</dict>
