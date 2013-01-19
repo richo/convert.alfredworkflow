@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>convert</string>
+	<string>richo:convert</string>
 	<key>connections</key>
 	<dict>
 		<key>4E106A8B-FF51-4C07-86CE-3406AE89F8BB</key>
@@ -124,6 +124,6 @@ print("%s: %s" % (lhs, rhs))</string>
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>https://github.com/richo</string>
+	<string>https://github.com/richo/convert.alfredapp</string>
 </dict>
 </plist>
