@@ -76,7 +76,7 @@ def get_string_value(string, key):
   second_quote = string.index('"', first_quote)
   return string[first_quote:second_quote]
 
-query = '52f in c'
+query = '{query}'
 try:
   _from, _to = query.split(" in ")
 except ValueError:
