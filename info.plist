@@ -68,27 +68,21 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>import json
-import httplib
+				<string>$query = '{query}';
 
-query = '{query}'
-try:
-  _from, _to = query.split(" in ")
-except ValueError:
-  print("Invalid input")
-  exit()
+$params = explode(" in ", $query);
+if (count($params) != 2) {
+  printf("Invalid params: %s", $query);
+  exit();
+}
 
-conn = httplib.HTTPSConnection("www.google.com")
-req  = "/ig/calculator?q=%s=%?%s" % (_from, _to)
+$request = sprintf("http://www.google.com/ig/calculator?q=%s=?%s", $params[0], $params[1]);
+$json = file_get_contents("http://www.example.com/file.xml");
+$data = json_decode($json);
 
-resp = conn.request("GET", req)
-if resp.status != 200:
-  print("Internal Error")
-  exit()
-data = json.loads(resp.read())
-print("%s: %s", data['lhs'], data['rhs'])</string>
+printf("%s: %s", $data["lhs"], $data["rhs"]);</string>
 				<key>type</key>
-				<integer>3</integer>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
