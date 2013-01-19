@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>convert</string>
+	<key>connections</key>
+	<dict>
+		<key>4E106A8B-FF51-4C07-86CE-3406AE89F8BB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>853638F3-9137-4228-AC2C-D46E51D5D3DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>61FC2E61-ADE3-45D8-984D-42EB68D539A0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4E106A8B-FF51-4C07-86CE-3406AE89F8BB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>richo</string>
+	<key>description</key>
+	<string>Convert things to other things</string>
+	<key>name</key>
+	<string>convert</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>convert</string>
+				<key>subtext</key>
+				<string>Format: Convert 6F in C</string>
+				<key>text</key>
+				<string>Convert '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>61FC2E61-ADE3-45D8-984D-42EB68D539A0</string>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>853638F3-9137-4228-AC2C-D46E51D5D3DA</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>import json
+import httplib
+
+query = '{query}'
+try:
+  _from, _to = query.split(" in ")
+except ValueError:
+  print("Invalid input")
+  exit()
+
+conn = httplib.HTTPSConnection("www.google.com")
+req  = "/ig/calculator?q=%s=%?%s" % (_from, _to)
+
+resp = conn.request("GET", req)
+if resp.status != 200:
+  print("Internal Error")
+  exit()
+data = json.loads(resp.read())
+print("%s: %s", data['lhs'], data['rhs'])</string>
+				<key>type</key>
+				<integer>3</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4E106A8B-FF51-4C07-86CE-3406AE89F8BB</string>
+		</dict>
+	</array>
+	<key>uidata</key>
+	<dict>
+		<key>4E106A8B-FF51-4C07-86CE-3406AE89F8BB</key>
+		<dict>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+		<key>61FC2E61-ADE3-45D8-984D-42EB68D539A0</key>
+		<dict>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>853638F3-9137-4228-AC2C-D46E51D5D3DA</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/richo</string>
+</dict>
+</plist>
